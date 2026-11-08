@@ -120,6 +120,7 @@ langchain_app/
 │   ├── agent.dart             # Lógica principal del agente
 │   └── tools/
 │       ├── buscar_internet.dart   # Tool Tavily (langchain_community)
+│       ├── calculadora.dart       # CalculatorTool (langchain_community)
 │       └── contar_letras.dart     # Tool personalizada
 ├── .env                       # Variables de entorno (no commitear)
 ├── .env.example               # Plantilla de variables
@@ -168,12 +169,13 @@ langchain_app/
    final toolsMap = <String, Tool<dynamic, ToolOptions, String>>{
      contarLetrasTool.name: contarLetrasTool,
      buscadorInternet.name: buscadorInternet,
+     calculadora.name: calculadora,
      miHerramientaTool.name: miHerramientaTool,  // ← Agregar
    };
 
    // En bind():
    final modelWithTools = model.bind(
-     ChatOllamaOptions(tools: [contarLetrasTool, buscadorInternet, miHerramientaTool]),
+     ChatOllamaOptions(tools: [contarLetrasTool, buscadorInternet, calculadora, miHerramientaTool]),
    );
    ```
 

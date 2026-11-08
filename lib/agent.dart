@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:langchain/langchain.dart';
 import 'package:langchain_app/tools/buscador_internet.dart';
+import 'package:langchain_app/tools/calculadora.dart';
 import 'package:langchain_app/tools/contar_letras.dart';
 import 'package:langchain_ollama/langchain_ollama.dart';
 
@@ -15,13 +16,14 @@ void agent() async {
 
   //  Vincular (bind) la herramienta directamente al modelo
   final modelWithTools = model.bind(
-    ChatOllamaOptions(tools: [contarLetrasTool, buscadorInternet]),
+    ChatOllamaOptions(tools: [contarLetrasTool, buscadorInternet, calculadora]),
   );
 
   // Mapear nombres de herramientas a sus instancias para evitar código repetitivo
   final toolsMap = <String, Tool<dynamic, ToolOptions, String>>{
     contarLetrasTool.name: contarLetrasTool,
     buscadorInternet.name: buscadorInternet,
+    calculadora.name: calculadora,
   };
 
   print(
